@@ -7,20 +7,10 @@
 #include <string.h>
 
 
-#define NUM 10
-
-/** function **/
-void openCSV (FILE *fp);
-void initArray (double *subject);
-int* fun ();
-void edit(int* address);
-void not_array(int* address);
-
-double *CreateDoubleArray1d (int col);
-void add (double *input);
-void RandomScore (int col, double *src);
+#define NUM 100
 
 /** value **/
+
 typedef struct STUDENT
 {
     char   *ID[9];
@@ -28,5 +18,15 @@ typedef struct STUDENT
     double *Math;
     double *Science;
 }STUDENT;
+
+
+/** function **/
+
+double *CreateDoubleArray1d (int col);
+void add (double *input);
+void RandomScore (int col, double *src);
+void FillOutCSV (FILE *csv,int col, double *subject1, double *subject2, double *subject3);
+
+
 
 #endif

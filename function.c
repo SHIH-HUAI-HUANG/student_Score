@@ -1,104 +1,50 @@
 #include "header.h"
 
-//Function : Open the .scv file
-//Input    : file's name
-//Output   :
-void openCSV (FILE *fp)
-{
-    fp = fopen("score.csv", "w");
-    char line[20];
-    char *result = NULL;
-    fprintf (fp, "hello,123,456,789\n");
-    fprintf (fp, "andy,13,56,79\n");
-    fprintf (fp, "%s,%s,%s,%s", "Ling", "84", "345", "24");
-    while(fgets(line, 20, fp) != NULL)
-    {
-        result = strtok(line, ",");
-        int i = 0;
-        while( result != NULL )
-        {
-            if(i!=0)
-            {
-                printf("%d\t", atoi(result));
-            }
-            else
-            {
-                printf("%s\t", result);
-                i++;
-            }
-            result = strtok(NULL, ",");
-        }
-        printf("\n");
-    }
-    fclose (fp);
-    return 0;
-}
 
-//Function :
-//Input    :
-//Output   :
-void initArray (double *subject)
-{
-    subject = calloc (NUM, sizeof(double));
-
-
-    for (int i = 0; i < NUM; i++)
-    {
-        subject[i] = rand()%1000 + (rand()%1000+1)*0.001;
-        printf("%.3f\n", subject[i]);
-    }
-}
-
-int* fun ()
-{
-    int *p;
-    p = calloc (5, sizeof(int));
-    *p = 8787;
-    return p;
-}
-
-void edit(int* address)
-{
-    address[2]=69420;
-    address[3]=42069;
-}
-
-void not_array(int* address)
-{
-    *address=5678;
-}
-
-//Function :
-//Input    :
-//Output   :
+//Function : Memory allocate the double Array.
+//Input    : the colum of Array.
+//Output   : the address of Array.
 double *CreateDoubleArray1d (int col)
 {
     double *address = (double *) calloc(col, sizeof(double));
     return address;
 }
 
-void add (double *input)
-{
-    input[0] = input[0] + 87;
-}
 
-//Function :
+
+//Function : assign random number in double Array. (random is 000.000 ~ 1000.000)
 //Input    :
 //Output   :
 void RandomScore (int col, double *src)
 {
     for (int i = 0; i < col; i++)
     {
-      src[i] = rand()%1000 + (rand()%1000+1)*0.001;
+        src[i] = rand()%1000 + (rand()%1000+1)*0.001 + 1;
     }
 }
 
 
 
+//Function : store the memory of score in .csv file.
+//Input    : csv file, English, Math, Science
+//Output   :
+void FillOutCSV (FILE *csv,int col, double *subject1, double *subject2, double *subject3)
+{
+    csv = fopen("score.csv", "w");
+    for (int i = 0; i < col; i++)
+    {
+        fprintf(csv, " ,%.3f,%.3f,%.3f\n", subject1[i], subject2[i], subject3[i]);
+    }
+    fclose (csv);
+    return 0;
+}
 
 
-
-
+//for example
+void add (double *input)
+{
+    input[0] = input[0] + 87;
+}
 
 
 
