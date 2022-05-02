@@ -10,15 +10,15 @@
 
 int main()
 {
-    //define value
+    // define value
     STUDENT student;
     FILE *fp;
     srand ( time(NULL) );
-    //空間配置
+    // Memory allocation
     student.English = CreateDoubleArray1d (NUM);
     student.Math    = CreateDoubleArray1d (NUM);
     student.Science = CreateDoubleArray1d (NUM);
-    //亂數配置
+    // Random
     RandomScore (NUM, student.English);
     RandomScore (NUM, student.Math);
     RandomScore (NUM, student.Science);
