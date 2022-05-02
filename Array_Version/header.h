@@ -7,13 +7,13 @@
 #include <string.h>
 
 
-#define NUM 100
+#define NUM 10
 
 /** value **/
 
 typedef struct STUDENT
 {
-    char   *ID[9];
+    char   **ID;
     double *English;
     double *Math;
     double *Science;
@@ -23,9 +23,11 @@ typedef struct STUDENT
 /** function **/
 
 double *CreateDoubleArray1d (int col);
+double **CreateCharArray2d (int row, int col);
 void add (double *input);
 void RandomScore (int col, double *src);
-void FillOutCSV (FILE *csv,int col, double *subject1, double *subject2, double *subject3);
+void RandomStudentID (int row, int col, char **src);
+void FillOutCSV (FILE *csv,int col, double *subject1, double *subject2, double *subject3, char **student);
 
 
 
