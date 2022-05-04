@@ -28,14 +28,15 @@ int main()
     FillOutCSV (csv, NUM, student.English, student.Math, student.Science, student.ID);
 
 
-/*******************************************************/
+    /*******************************************************/
 
+    printf("num = %lf\n", ceil(10.5) );
 
-
-
+    //printf ("lines = %d\n", GetCsvLines (csv) );
     free (student.English);
     free (student.Math);
     free (student.Science);
+    free (student.ID);
     system("pause");
     system("cls");
     printf("Hello world!\n");
