@@ -26,14 +26,20 @@ typedef struct STUDENT
 
 double *CreateDoubleArray1d (int col);
 double **CreateCharArray2d (int row, int col);
+STUDENT CallocStudent (STUDENT student, int number);
 void add (double *input);
 void RandomScore (int col, double *src);
 void RandomStudentID (int row, int col, char **src);
+void RandomStudent (STUDENT student, int number);
 
-void FillOutCSV (FILE *csv,int col, double *subject1, double *subject2, double *subject3, char **student);
+void FillOutCSV (FILE *csv,int col, STUDENT student);
 
 void Swap (double *num1, double *num2);
-bool BoysGameString (int row1,int row2, char **src, int add);
+bool NumericComparison (int row1,int row2, char **src, int add);
 int GetCsvLines (FILE *csv);
+
+
+void BubbleSortID (char **src, int number);
+void SwapID (char **src, int number1, int number2);
 
 #endif

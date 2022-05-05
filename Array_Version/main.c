@@ -19,19 +19,28 @@ int main()
     student.Math    = CreateDoubleArray1d (NUM);
     student.Science = CreateDoubleArray1d (NUM);
     student.ID      = CreateCharArray2d (NUM, 10);
+    //student = CallocStudent (student, NUM);
     // Random
     RandomScore (NUM, student.English);
     RandomScore (NUM, student.Math);
     RandomScore (NUM, student.Science);
     RandomStudentID (NUM, 10, student.ID);
+    //RandomStudent (student, NUM);
     // Store in file.CSV
-    FillOutCSV (csv, NUM, student.English, student.Math, student.Science, student.ID);
+
+    BubbleSortID (student.ID, NUM);
+
+    FillOutCSV (csv, NUM, student);
+
+
+    /*************************test**************************/
+
+    //printf("num = %lf\n", ceil(10.5)); Gauss function
+
+
 
 
     /*******************************************************/
-
-    printf("num = %lf\n", ceil(10.5) );
-
     //printf ("lines = %d\n", GetCsvLines (csv) );
     free (student.English);
     free (student.Math);

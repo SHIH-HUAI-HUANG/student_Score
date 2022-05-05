@@ -25,6 +25,22 @@ double **CreateCharArray2d (int row, int col)
     return address;
 }
 
+
+
+//Function : Memory allocate
+//Input    :
+//Output   :
+STUDENT CallocStudent (STUDENT student, int number)
+{
+    student.English = CreateDoubleArray1d (number);
+    student.Math    = CreateDoubleArray1d (number);
+    student.Science = CreateDoubleArray1d (number);
+    student.ID      = CreateCharArray2d (number, 10);
+    return student;
+}
+
+
+
 //Function : assign random number in double Array. (random is 000.000 ~ 1000.000)
 //Input    :
 //Output   :
@@ -54,7 +70,7 @@ void RandomStudentID (int row, int col, char **src)
                 src[i][j] = (char)(rand()%10 + 48);
             }
             src[i][col - 1] = '\0';
-            printf("id = %s\n", src[i]);
+            //printf("id = %s\n", src[i]);
             for (int k = 0; k < i; k++)
             {
                 if (src[i] == src[k]) repeat = true;
@@ -67,10 +83,25 @@ void RandomStudentID (int row, int col, char **src)
 
 
 
+//Function : Memory allocate
+//Input    :
+//Output   :
+void RandomStudent (STUDENT student, int number)
+{
+
+    RandomScore (number, student.English);
+    RandomScore (number, student.Math);
+    RandomScore (number, student.Science);
+    RandomStudentID (number, 10, student.ID);
+
+}
+
+
+
 //Function : store the memory of score in .csv file.
 //Input    : file.csv, English, Math, Science
 //Output   :
-void FillOutCSV (FILE *csv,int col, double *subject1, double *subject2, double *subject3, char **student)
+void FillOutCSV (FILE *csv,int col, STUDENT student)
 {
     //csv = fopen("score.csv", "w");
     if( (csv = fopen("score.csv", "w")) == NULL )
@@ -81,7 +112,7 @@ void FillOutCSV (FILE *csv,int col, double *subject1, double *subject2, double *
     fprintf(csv, "StudentID, English, Math, Science\n");
     for (int i = 0; i < col; i++)
     {
-        fprintf(csv, "K%s,%.3f,%.3f,%.3f\n", student[i], subject1[i], subject2[i], subject3[i]);
+        fprintf(csv, "K%s,%.3f,%.3f,%.3f\n", student.ID[i], student.English[i], student.Math[i], student.Science[i]);
     }
     fclose (csv);
     return 0;
@@ -96,8 +127,8 @@ void add (double *input)
 
 
 
-//Function : store the memory of score in .csv file.
-//Input    : csv file, English, Math, Science
+//Function :
+//Input    :
 //Output   :
 void Swap (double *num1, double *num2)
 {
@@ -111,14 +142,14 @@ void Swap (double *num1, double *num2)
 
 //Function :
 //Input    : add = 0
-//Output   :
-bool BoysGameString (int row1,int row2, char **src, int add)
+//Output   : > return true, < return false
+bool NumericComparison (int row1,int row2, char **src, int add)
 {
     if       ( src[row1][add] > src[row2][add] ) return true;
 
     else if ( src[row1][add] < src[row2][add] ) return false;
 
-    else if ( src[row1][add] = src[row2][add] ) BoysGameString (row1, row2, **src, add+1);
+    else if ( src[row1][add] = src[row2][add] ) return NumericComparison (row1, row2, src, add+1);
 }
 
 
@@ -147,32 +178,35 @@ int GetCsvLines (FILE *csv)
 
 
 
-//Function : get the lines of file.csv
-//Input    : file.csv
-//Output   : the number of lines
-void QuickSort (int left,int right, char **src)
+//Function : Bubble Sort for string
+//Input    : source, numbers of students
+//Output   :
+void BubbleSortID (char **src, int number)
 {
- if(left < right) {
-        int s = number[(left+right)/2];
-        int i = left - 1;
-        int j = right + 1;
-
-        while(1) {
-            while(number[++i] < s) ;  // 向右找
-            while(number[--j] > s) ;  // 向左找
-            if(i >= j)
-                break;
-            SWAP(number[i], number[j]);
+    for (int i = 0; i < (number-1); i++)
+    {
+        for (int j = (i+1); j < number; j++)
+        {
+            if ( NumericComparison (i, j, src, 0) )
+            {
+                SwapID (src, i, j);
+            }
         }
-
-        quickSort(number, left, i-1);   // 對左邊進行遞迴
-        quickSort(number, j+1, right);  // 對右邊進行遞迴
     }
 
 }
 
 
 
+//Function : Swap for string
+//Input    : source, two numbers you want to change
+//Output   :
+void SwapID (char **src, int number1, int number2)
+{
+    char **temp = (char **) calloc(1, sizeof(char *));
+    temp[0] = (char *) calloc(10, sizeof(char));
 
-
-
+    temp[0]      = src[number1];
+    src[number1] = src[number2];
+    src[number2] = temp[0];
+}
