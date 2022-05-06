@@ -161,8 +161,6 @@ void SwapScore (STUDENT *student, int number1, int number2)
 
 
 
-
-
 /*****************************************************/
 
 /*
