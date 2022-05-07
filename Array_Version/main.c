@@ -35,6 +35,12 @@ int main()
 
     while ( !stop )
     {
+        //int a[10];
+        int *a;
+        printf("%d", *a);
+
+
+
         BubbleSortID (student, NUM);
         Menu ();
         int stateKey = 0;
@@ -45,8 +51,8 @@ int main()
         switch (state)
         {
         case oneStudent :
-            printf("1\n");
-            system("pause");
+
+
 
             break;
 
@@ -56,8 +62,8 @@ int main()
             break;
 
         case inquireOneStudent :
-            printf("3\n");
-            system("pause");
+
+            OneStudent (student, NUM);
 
             break;
 

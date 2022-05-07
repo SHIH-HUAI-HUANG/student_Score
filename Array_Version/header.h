@@ -54,5 +54,9 @@ void BubbleSortSubject (STUDENT *student, int number);
 void PrintfScoreTOP10 (STUDENT *student);
 void BubbleSortTotalScore (STUDENT *student, int number);
 void PrintfStudentTOP10 (STUDENT *student);
+void OneStudent (STUDENT *student, int number);
+void PrintfStudentINFO (STUDENT *student, int number);
+void PrintTotalScore (STUDENT *student, int number);
+
 
 #endif

@@ -3,8 +3,8 @@
 void End ()
 {
     system ("cls");
-    printf("\n thank you bitch\n\n\n");
-    printf("\nfinish ~ ~");
+    printf("\n It's absolutely not a problem if money could solve.\n");
+    printf("\n                                         -- John Wu\n\n");
 }
 
 
