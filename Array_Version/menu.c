@@ -1,11 +1,13 @@
 #include "header.h"
 
-
-void PrintfAllStudent (STUDENT *student)
+//Function : Print all students' IDs and Scores.
+//Input    : student's information, numbers of students
+//Output   :
+void PrintfAllStudent (STUDENT *student, int number)
 {
     system("cls");
     printf("studentID  English  Math  Science\n");
-    for (int i = 0; i < NUM; i++)
+    for (int i = 0; i < number; i++)
     {
         printf("K%s %.3f   %.3f   %.3f\t\n", student[i].ID, student[i].English, student[i].Math, student[i].Science);
     }
@@ -17,7 +19,7 @@ void PrintfAllStudent (STUDENT *student)
 
 
 //Function : Bubble Sort for string
-//Input    : source, numbers of students
+//Input    : student's information, numbers of students
 //Output   :
 void BubbleSortSubject (STUDENT *student, int number)
 {
@@ -144,6 +146,105 @@ void PrintTotalScore (STUDENT *student, int number)
     float total = student[number].English + student[number].Math + student[number].Science;
     printf("Total Score = %.3f \n", total);
 }
+
+/************** some fucking problem ********************/
+void InsertStudent (STUDENT *student, int *number)
+{
+    system("cls");
+    char id[10];
+    id[9] = '\0';
+    printf("StudentID   = K");
+    scanf("%s", &id);
+
+ *number = *number + 1;// number of students add 1
+    STUDENT *temp;
+    temp = CreateStudentArray (*number);
+    CopyStudent (temp, student, *number-1);
+    printf("number = %d\n", *number);
+
+    printf("number = %d\n", *number);
+
+    student = CreateStudentArray (*number);
+    CopyStudent (student, temp, *number);
+
+    free (temp);
+    system("pause");
+}
+
+
+
+//Function : Delete one student's information about ID and score.
+//Input    :
+//Output   :
+void DeleteStudent (STUDENT *student, int *number)
+{
+    system("cls");
+    char id[10];
+    id[9] = '\0';
+    printf("StudentID   = K");
+    scanf("%s", &id);
+
+    int i = -1;
+    bool same = false;
+    // check
+    while ( !same )
+    {
+        i++;
+        if (i == *number)
+        {
+            printf("The StudentID is not exist !\n");
+            same = true;
+        }
+        else
+        {
+            if( strcmp(id, student[i].ID) == 0 ) same = true;
+        }
+    }
+
+    for (int j = i; j < (*number-1); j++)
+    {
+        student[j].ID      = student[j+1].ID;
+        student[j].English = student[j+1].English;
+        student[j].Math    = student[j+1].Math;
+        student[j].Science = student[j+1].Science;
+    }
+    *number = *number - 1;// number of students minus 1
+
+    STUDENT *temp;
+    temp = CreateStudentArray (*number);
+    CopyStudent (temp, student, *number);
+    student = CreateStudentArray (*number);
+    CopyStudent (student, temp, *number);
+
+    system("pause");
+}
+
+
+
+//Function : Copy student's information from file2 to file1.
+//Input    :
+//Output   :
+void CopyStudent (STUDENT *file1, STUDENT *file2, int number)
+{
+    for (int i = 0; i < number; i++)
+    {
+        file1[i].ID      = file2[i].ID;
+        file1[i].English = file2[i].English;
+        file1[i].Math    = file2[i].Math;
+        file1[i].Science = file2[i].Science;
+    }
+
+}
+
+
+
+
+
+
+
+
+
+
 
 
 

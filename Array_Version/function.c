@@ -55,7 +55,7 @@ void RandomID (STUDENT *student, int number)
 //Function : store the memory of score in .csv file.
 //Input    : file.csv, English, Math, Science
 //Output   :
-void FillOutCSV (FILE *csv, STUDENT *student, int number)
+void FillOutCSV (FILE *csv, STUDENT *student, int *number)
 {
     //csv = fopen("score.csv", "w");
     if( (csv = fopen("score.csv", "w")) == NULL )
@@ -64,8 +64,9 @@ void FillOutCSV (FILE *csv, STUDENT *student, int number)
         exit(0);
     }
     fprintf(csv, "StudentID, English, Math, Science\n");
-    for (int i = 0; i < number; i++)
+    for (int i = 0; i < *number; i++)
     {
+        printf("//////// \n");
         fprintf(csv, "K%s,%.3f,%.3f,%.3f\n",
                 student[i].ID,
                 student[i].English,
@@ -73,7 +74,6 @@ void FillOutCSV (FILE *csv, STUDENT *student, int number)
                 student[i].Science);
     }
     fclose (csv);
-    return 0;
 }
 
 
@@ -157,9 +157,16 @@ void SwapScore (STUDENT *student, int number1, int number2)
 
 
 
+// change value in function
+void test(int *a)
+{
+    *a = 123546;
+}
 
-
-
+void test2 (STUDENT *student)
+{
+    student[0].ID = student[1].ID;
+}
 
 /*****************************************************/
 

@@ -11,19 +11,23 @@
 int main()
 {
     // define value
-    STUDENT *student;//test
+    int studentNum = 50;
+    STUDENT *student;
     STATE state;
     FILE *csv;
     bool stop = false;
     srand ( time(NULL) );
     // Memory allocation
-    student = CreateStudentArray(NUM);//test
+    student = CreateStudentArray (studentNum);
     // Random
-    RandomID (student, NUM);
-    RandomScore (student, NUM);
-    BubbleSortID (student, NUM);
+    RandomID (student, studentNum);
+    RandomScore (student, studentNum);
+    BubbleSortID (student, studentNum);
     // Store in file.CSV
-    FillOutCSV (csv, student, NUM);
+    FillOutCSV (csv, student, &studentNum);
+
+    //test (&studentNum);
+    //printf("a = %d\n", studentNum);
 
 
     system("pause");
@@ -35,13 +39,7 @@ int main()
 
     while ( !stop )
     {
-        //int a[10];
-        int *a;
-        printf("%d", *a);
-
-
-
-        BubbleSortID (student, NUM);
+        BubbleSortID (student, studentNum);
         Menu ();
         int stateKey = 0;
         printf("state = ");
@@ -50,36 +48,36 @@ int main()
 
         switch (state)
         {
-        case oneStudent :
-
-
-
-            break;
-
         case allStudent :
-            PrintfAllStudent (student);
+            PrintfAllStudent (student, studentNum);
 
             break;
 
         case inquireOneStudent :
 
-            OneStudent (student, NUM);
+            OneStudent (student, studentNum);
 
             break;
 
         case inquireSubjectTOP10 :
-            BubbleSortSubject (student, NUM);
+            BubbleSortSubject (student, studentNum);
             PrintfScoreTOP10(student);
 
             break;
 
         case inquireStudentTOP10 :
-            BubbleSortTotalScore (student, NUM);
+            BubbleSortTotalScore (student, studentNum);
             PrintfStudentTOP10 (student);
             break;
 
         case modifyData :
-            printf("6\n");
+
+            //InsertStudent (student, &studentNum);
+            DeleteStudent (student, &studentNum);
+            printf("number = %d\n", studentNum);
+            FillOutCSV (csv, student, &studentNum);
+
+
             system("pause");
 
             break;
@@ -89,7 +87,6 @@ int main()
             system("pause");
             stop = true;
             break;
-
         }
 
     }
