@@ -261,13 +261,13 @@ void DeleteStudent (STUDENT *student, int *number)
     }
     *number = *number - 1;// number of students minus 1
 
-    STUDENT *temp;
+   /* STUDENT *temp;
     temp = CreateStudentArray (*number);
     CopyStudent (temp, student, *number);
     free (student);
     student = CreateStudentArray (*number);
     CopyStudent (student, temp, *number);
-    free (temp);
+    free (temp);*/
 
     system("pause");
 }

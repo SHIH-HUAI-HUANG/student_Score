@@ -109,6 +109,7 @@ int main()
         case deleteData :
 
             DeleteStudent (student, &studentNum);
+            student = (STUDENT *) realloc(student, sizeof(STUDENT) * studentNum );
             FillOutCSV (csv, student, &studentNum);
             system("pause");
 
