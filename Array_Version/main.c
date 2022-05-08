@@ -11,7 +11,7 @@
 int main()
 {
     // define value
-    int studentNum = 10;
+    int studentNum = 1000;
     STUDENT *student;
     STATE state;
     FILE *csv;

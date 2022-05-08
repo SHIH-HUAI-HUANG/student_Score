@@ -1,7 +1,7 @@
 # DataStructure Homework - 1
 
-- **Author : Shih - Huai, Huang**
-- **teacher : John Wu   a.k.a  _Pokemon Master_  **
+- **Author** : _Shih - Huai, Huang_
+- **teacher** : _John Wu   a.k.a  Pokemon Master_  
 
 ### ArrayVersion - Function :
 

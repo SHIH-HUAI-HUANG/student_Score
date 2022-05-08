@@ -84,7 +84,7 @@ void PrintEnglishTOP10 (STUDENT *student)
     printf("English TOP 10 \n");
     for (int i = 0; i < 10; i++)
     {
-        printf("number%d = %.3f\n", i+1, student[i].English);
+        printf("number%d ( K%s ) = %.3f\n", i+1, student[i].ID, student[i].English);
     }
 }
 
@@ -95,7 +95,7 @@ void PrintMathTOP10 (STUDENT *student)
     printf("\nMath TOP 10 \n");
     for (int i = 0; i < 10; i++)
     {
-        printf("number%d = %.3f\n", i+1, student[i].Math);
+        printf("number%d ( K%s ) = %.3f\n", i+1, student[i].ID, student[i].Math);
     }
 }
 
@@ -106,7 +106,7 @@ void PrintScienceTOP10 (STUDENT *student)
     printf("\nScience TOP 10 \n");
     for (int i = 0; i < 10; i++)
     {
-        printf("number%d = %.3f\n", i+1, student[i].Science);
+        printf("number%d ( K%s ) = %.3f\n", i+1, student[i].ID, student[i].Science);
     }
     system("pause");
 }
@@ -186,6 +186,10 @@ void OneStudent (STUDENT *student, int number)
     if (i != number)
     {
         PrintfStudentINFO (student, i);
+        RankEnglish (student, number, i);
+        RankMath (student, number, i);
+        RankScience (student, number, i);
+        RankTotalScore (student, number, i);
     }
 
     system("pause");
@@ -290,14 +294,50 @@ void CopyStudent (STUDENT *file1, STUDENT *file2, int number)
 }
 
 
+void RankEnglish (STUDENT *student, int total, int number)
+{
+    int place = 1;
+    for (int i = 0; i < total; i++)
+    {
+        if (student[number].English < student[i].English) place = place + 1;
+    }
+    printf ("The English place is : %d\n", place);
+}
+
+
+void RankMath (STUDENT *student, int total, int number)
+{
+    int place = 1;
+    for (int i = 0; i < total; i++)
+    {
+        if (student[number].Math < student[i].Math) place = place + 1;
+    }
+    printf ("The Math    place is : %d\n", place);
+}
 
 
 
+void RankScience (STUDENT *student, int total, int number)
+{
+    int place = 1;
+    for (int i = 0; i < total; i++)
+    {
+        if (student[number].Science < student[i].Science) place = place + 1;
+    }
+    printf ("The Science place is : %d\n", place);
+}
 
 
-
-
-
-
+void RankTotalScore (STUDENT *student, int total, int number)
+{
+    int place = 1;
+    float totalscore1 = student[number].English + student[number].Math + student[number].Science;
+    for (int i = 0; i < total; i++)
+    {
+        float totalscore2 = student[i].English + student[i].Math + student[i].Science;
+        if (totalscore1 < totalscore2) place = place + 1;
+    }
+    printf ("The student rank is  : %d\n", place);
+}
 
 

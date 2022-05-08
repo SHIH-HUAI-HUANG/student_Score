@@ -56,6 +56,10 @@ void BubbleSortScience (STUDENT *student, int number);
 void PrintEnglishTOP10 (STUDENT *student);
 void PrintMathTOP10 (STUDENT *student);
 void PrintScienceTOP10 (STUDENT *student);
+void RankEnglish (STUDENT *student, int total, int number);
+void RankMath (STUDENT *student, int total, int number);
+void RankScience (STUDENT *student, int total, int number);
+void RankTotalScore (STUDENT *student, int total, int number);
 
 
 void BubbleSortTotalScore (STUDENT *student, int number);
