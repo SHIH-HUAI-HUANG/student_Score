@@ -11,7 +11,7 @@
 int main()
 {
     // define value
-    int studentNum = 50;
+    int studentNum = 10;
     STUDENT *student;
     STATE state;
     FILE *csv;
@@ -37,6 +37,7 @@ int main()
     //printf("keyboard = ");
     //printf("%c\n", getch() );
 
+    char *id;
     while ( !stop )
     {
         BubbleSortID (student, studentNum);
@@ -49,40 +50,72 @@ int main()
         switch (state)
         {
         case allStudent :
-            PrintfAllStudent (student, studentNum);
 
+            PrintfAllStudent (student, studentNum);
             break;
 
         case inquireOneStudent :
 
             OneStudent (student, studentNum);
-
             break;
 
         case inquireSubjectTOP10 :
-            BubbleSortSubject (student, studentNum);
-            PrintfScoreTOP10(student);
 
+            BubbleSortEnglish (student, studentNum);
+            PrintEnglishTOP10 (student);
+            BubbleSortMath (student, studentNum);
+            PrintMathTOP10 (student);
+            BubbleSortScience (student, studentNum);
+            PrintScienceTOP10 (student);
             break;
 
         case inquireStudentTOP10 :
+
             BubbleSortTotalScore (student, studentNum);
             PrintfStudentTOP10 (student);
             break;
 
-        case modifyData :
+        case insertData :
+
+
+            id = (char *) calloc(10, sizeof(char));
+            //id = "123456789";
+
+            //printf("StudentID   = K");
+            //scanf("%s", *id);
+
 
             //InsertStudent (student, &studentNum);
-            DeleteStudent (student, &studentNum);
-            printf("number = %d\n", studentNum);
+
+            studentNum = studentNum + 1;// number of students add 1
+
+            student = (STUDENT *) realloc(student, sizeof(STUDENT) * studentNum );
+            student[ studentNum-1 ].ID = (char *) calloc(10, sizeof(char));
+            //student[ studentNum-1 ].ID = id;
+            for (int j = 0; j < (10-1); j++)
+            {
+                student[ studentNum-1 ].ID[j] = (char)(rand()%10 + 48);
+            }
+            student[ studentNum-1 ].English = rand()%1000 + (rand()%1000+1)*0.001 + 1;
+            student[ studentNum-1 ].Math    = rand()%1000 + (rand()%1000+1)*0.001 + 1;
+            student[ studentNum-1 ].Science = rand()%1000 + (rand()%1000+1)*0.001 + 1;
+
+
             FillOutCSV (csv, student, &studentNum);
 
+            system("pause");
+            break;
 
+        case deleteData :
+
+            DeleteStudent (student, &studentNum);
+            FillOutCSV (csv, student, &studentNum);
             system("pause");
 
             break;
 
         case finish :
+
             End();
             system("pause");
             stop = true;

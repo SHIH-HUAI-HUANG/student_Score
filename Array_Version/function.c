@@ -52,7 +52,7 @@ void RandomID (STUDENT *student, int number)
 
 
 
-//Function : store the memory of score in .csv file.
+//Function : store the memory of score in file.csv.
 //Input    : file.csv, English, Math, Science
 //Output   :
 void FillOutCSV (FILE *csv, STUDENT *student, int *number)

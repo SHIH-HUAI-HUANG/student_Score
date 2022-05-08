@@ -29,8 +29,9 @@ typedef enum STATE
     inquireOneStudent   = 2,
     inquireSubjectTOP10 = 3,
     inquireStudentTOP10 = 4,
-    modifyData          = 5,
-    finish              = 6
+    insertData          = 5,
+    deleteData          = 6,
+    finish              = 7
 } STATE;
 
 
@@ -49,8 +50,14 @@ void Menu ();
 int GetCsvLines (FILE *csv);
 
 void PrintfAllStudent (STUDENT *student, int number);
-void BubbleSortSubject (STUDENT *student, int number);
-void PrintfScoreTOP10 (STUDENT *student);
+void BubbleSortEnglish (STUDENT *student, int number);
+void BubbleSortMath (STUDENT *student, int number);
+void BubbleSortScience (STUDENT *student, int number);
+void PrintEnglishTOP10 (STUDENT *student);
+void PrintMathTOP10 (STUDENT *student);
+void PrintScienceTOP10 (STUDENT *student);
+
+
 void BubbleSortTotalScore (STUDENT *student, int number);
 void PrintfStudentTOP10 (STUDENT *student);
 void OneStudent (STUDENT *student, int number);

@@ -18,10 +18,10 @@ void PrintfAllStudent (STUDENT *student, int number)
 
 
 
-//Function : Bubble Sort for string
+//Function : Bubble Sort for English, but only TOP-10.
 //Input    : student's information, numbers of students
 //Output   :
-void BubbleSortSubject (STUDENT *student, int number)
+void BubbleSortEnglish (STUDENT *student, int number)
 {
     for (int i = 0; i < (10-1); i++)
     {
@@ -38,7 +38,47 @@ void BubbleSortSubject (STUDENT *student, int number)
 
 
 
-void PrintfScoreTOP10 (STUDENT *student)
+//Function : Bubble Sort for Math, but only TOP-10.
+//Input    : student's information, numbers of students
+//Output   :
+void BubbleSortMath (STUDENT *student, int number)
+{
+    for (int i = 0; i < (10-1); i++)
+    {
+        for (int j = (i+1); j < number; j++)
+        {
+            if ( student[i].Math < student[j].Math )
+            {
+                SwapScore (student, i, j);
+                SwapID    (student, i, j);
+            }
+        }
+    }
+}
+
+
+
+//Function : Bubble Sort for Science, but only TOP-10.
+//Input    : student's information, numbers of students
+//Output   :
+void BubbleSortScience (STUDENT *student, int number)
+{
+    for (int i = 0; i < (10-1); i++)
+    {
+        for (int j = (i+1); j < number; j++)
+        {
+            if ( student[i].Science < student[j].Science )
+            {
+                SwapScore (student, i, j);
+                SwapID    (student, i, j);
+            }
+        }
+    }
+}
+
+
+
+void PrintEnglishTOP10 (STUDENT *student)
 {
     system("cls");
     printf("English TOP 10 \n");
@@ -46,10 +86,30 @@ void PrintfScoreTOP10 (STUDENT *student)
     {
         printf("number%d = %.3f\n", i+1, student[i].English);
     }
-    system("pause");
 }
 
 
+
+void PrintMathTOP10 (STUDENT *student)
+{
+    printf("\nMath TOP 10 \n");
+    for (int i = 0; i < 10; i++)
+    {
+        printf("number%d = %.3f\n", i+1, student[i].Math);
+    }
+}
+
+
+
+void PrintScienceTOP10 (STUDENT *student)
+{
+    printf("\nScience TOP 10 \n");
+    for (int i = 0; i < 10; i++)
+    {
+        printf("number%d = %.3f\n", i+1, student[i].Science);
+    }
+    system("pause");
+}
 
 
 //Function : Bubble Sort for string
@@ -151,23 +211,14 @@ void PrintTotalScore (STUDENT *student, int number)
 void InsertStudent (STUDENT *student, int *number)
 {
     system("cls");
-    char id[10];
+   /* char id[10];
     id[9] = '\0';
     printf("StudentID   = K");
-    scanf("%s", &id);
+    scanf("%s", &id);*/
 
- *number = *number + 1;// number of students add 1
-    STUDENT *temp;
-    temp = CreateStudentArray (*number);
-    CopyStudent (temp, student, *number-1);
-    printf("number = %d\n", *number);
-
-    printf("number = %d\n", *number);
-
-    student = CreateStudentArray (*number);
-    CopyStudent (student, temp, *number);
-
-    free (temp);
+    *number = *number + 1;// number of students add 1
+    student = (STUDENT *) realloc(*number, sizeof(STUDENT) );
+    student[ *number ].ID = (char *) calloc(10, sizeof(char));
     system("pause");
 }
 
@@ -213,8 +264,10 @@ void DeleteStudent (STUDENT *student, int *number)
     STUDENT *temp;
     temp = CreateStudentArray (*number);
     CopyStudent (temp, student, *number);
+    free (student);
     student = CreateStudentArray (*number);
     CopyStudent (student, temp, *number);
+    free (temp);
 
     system("pause");
 }

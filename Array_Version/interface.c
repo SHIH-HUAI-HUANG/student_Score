@@ -18,8 +18,9 @@ void Menu ()
     printf("(2) inquireOneStudent \n");
     printf("(3) inquireSubjectTOP10 \n");
     printf("(4) inquireStudentTOP10 \n");
-    printf("(5) modifyData \n");
-    printf("(6) finish \n");
+    printf("(5) insertData \n");
+    printf("(6) deleteData \n");
+    printf("(7) finish \n");
 
 }
 
