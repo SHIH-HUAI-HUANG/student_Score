@@ -66,7 +66,6 @@ void FillOutCSV (FILE *csv, STUDENT *student, int *number)
     fprintf(csv, "StudentID, English, Math, Science\n");
     for (int i = 0; i < *number; i++)
     {
-        printf("//////// \n");
         fprintf(csv, "K%s,%.3f,%.3f,%.3f\n",
                 student[i].ID,
                 student[i].English,

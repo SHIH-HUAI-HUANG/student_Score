@@ -221,12 +221,26 @@ STUDENT *InsertStudent (STUDENT *student, int *number)
 
     printf("StudentID   = K");
     scanf("%s", id);
-    printf("English =");
-    scanf("%f", &Eng);
-    printf("Math = ");
-    scanf("%f", &Math);
-    printf("Science = ");
-    scanf("%f", &Sci);
+
+    do
+    {
+        printf("English =");
+        scanf("%f", &Eng);
+    }
+    while (Eng<0.000 || Eng>1000.000);
+    do
+    {
+        printf("Math = ");
+        scanf("%f", &Math);
+    }
+    while (Math<0.000 || Math>1000.000);
+    do
+    {
+        printf("Science = ");
+        scanf("%f", &Sci);
+    }
+    while (Sci<0.000 || Sci>1000.000);
+
     *number = *number + 1;// number of students add 1
 
     student = (STUDENT *) realloc(student, sizeof(STUDENT) * (*number) );
@@ -256,19 +270,23 @@ STUDENT *DeleteStudent (STUDENT *student, int *number)
     scanf("%s", &id);
 
     int i = -1;
-    bool same = false;
+    bool stop = false, same = false;
     // check
-    while ( !same )
+    while ( !stop )
     {
         i++;
         if (i == *number)
         {
             printf("The StudentID is not exist !\n");
-            same = true;
+            stop = true;
         }
         else
         {
-            if( strcmp(id, student[i].ID) == 0 ) same = true;
+            if( strcmp(id, student[i].ID) == 0 )
+            {
+                stop = true;
+                same = true;
+            }
         }
     }
 
@@ -279,11 +297,13 @@ STUDENT *DeleteStudent (STUDENT *student, int *number)
         student[j].Math    = student[j+1].Math;
         student[j].Science = student[j+1].Science;
     }
-    *number = *number - 1;// number of students minus 1
-    student = (STUDENT *) realloc(student, sizeof(STUDENT) * (*number) );
+    if (same)
+    {
+        *number = *number - 1;// number of students minus 1
+        student = (STUDENT *) realloc(student, sizeof(STUDENT) * (*number) );
+    }
 
     printf ("The number of students is %d\n", *number);
-
 
     system("pause");
     return student;

@@ -26,18 +26,6 @@ int main()
     // Store in file.CSV
     FillOutCSV (csv, student, &studentNum);
 
-    //test (&studentNum);
-    //printf("a = %d\n", studentNum);
-
-
-    system("pause");
-    /*************************test**************************/
-//printf("num = %lf\n", ceil(10.5)); Gauss function
-
-    //printf("keyboard = ");
-    //printf("%c\n", getch() );
-
-
     while ( !stop )
     {
         BubbleSortID (student, studentNum);
@@ -91,7 +79,6 @@ int main()
             stop = true;
             break;
         }
-
     }
 
     free (student);
