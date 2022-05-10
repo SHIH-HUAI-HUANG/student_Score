@@ -67,9 +67,11 @@ void PrintfStudentTOP10 (STUDENT *student);
 void OneStudent (STUDENT *student, int number);
 void PrintfStudentINFO (STUDENT *student, int number);
 void PrintTotalScore (STUDENT *student, int number);
-void DeleteStudent (STUDENT *student, int *number);
+STUDENT *DeleteStudent (STUDENT *student, int *number);
 void CopyStudent (STUDENT *file1, STUDENT *file2, int number);
-void InsertStudent (STUDENT *student, int *number);
+STUDENT *InsertStudent (STUDENT *student, int *number);
+void PrintSubjectTOP10 (STUDENT *student,int number);
+
 
 void test(int *a);
 void test2 (STUDENT *student);

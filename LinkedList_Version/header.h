@@ -1,4 +1,3 @@
-
 #ifndef _HEADER_H_
 #define _HEADER_H_
 
@@ -21,7 +20,7 @@ typedef struct STUDENT
     float English;
     float Math;
     float Science;
-    STUDENT *
+    struct STUDENT *next;
 } STUDENT;
 
 

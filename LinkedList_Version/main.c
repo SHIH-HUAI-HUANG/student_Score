@@ -10,6 +10,14 @@
 
 int main()
 {
+    STUDENT *student;
+
+
+
+
+
+
+
     printf("Hello world!\n");
     return 0;
 }

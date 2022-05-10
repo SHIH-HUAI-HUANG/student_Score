@@ -5,6 +5,7 @@ void End ()
     system ("cls");
     printf("\n It's absolutely not a problem if money could solve.\n");
     printf("\n                                         -- John Wu\n\n");
+    system("pause");
 }
 
 

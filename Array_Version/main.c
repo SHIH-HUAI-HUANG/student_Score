@@ -11,7 +11,7 @@
 int main()
 {
     // define value
-    int studentNum = 1000;
+    int studentNum = 10;
     STUDENT *student;
     STATE state;
     FILE *csv;
@@ -37,10 +37,12 @@ int main()
     //printf("keyboard = ");
     //printf("%c\n", getch() );
 
-    char *id;
+
     while ( !stop )
     {
         BubbleSortID (student, studentNum);
+        FillOutCSV (csv, student, &studentNum);
+
         Menu ();
         int stateKey = 0;
         printf("state = ");
@@ -61,12 +63,8 @@ int main()
 
         case inquireSubjectTOP10 :
 
-            BubbleSortEnglish (student, studentNum);
-            PrintEnglishTOP10 (student);
-            BubbleSortMath (student, studentNum);
-            PrintMathTOP10 (student);
-            BubbleSortScience (student, studentNum);
-            PrintScienceTOP10 (student);
+            PrintSubjectTOP10 (student, studentNum);
+
             break;
 
         case inquireStudentTOP10 :
@@ -77,59 +75,26 @@ int main()
 
         case insertData :
 
+            student = InsertStudent (student, &studentNum);
 
-            id = (char *) calloc(10, sizeof(char));
-            //id = "123456789";
-
-            //printf("StudentID   = K");
-            //scanf("%s", *id);
-
-
-            //InsertStudent (student, &studentNum);
-
-            studentNum = studentNum + 1;// number of students add 1
-
-            student = (STUDENT *) realloc(student, sizeof(STUDENT) * studentNum );
-            student[ studentNum-1 ].ID = (char *) calloc(10, sizeof(char));
-            //student[ studentNum-1 ].ID = id;
-            for (int j = 0; j < (10-1); j++)
-            {
-                student[ studentNum-1 ].ID[j] = (char)(rand()%10 + 48);
-            }
-            student[ studentNum-1 ].English = rand()%1000 + (rand()%1000+1)*0.001 + 1;
-            student[ studentNum-1 ].Math    = rand()%1000 + (rand()%1000+1)*0.001 + 1;
-            student[ studentNum-1 ].Science = rand()%1000 + (rand()%1000+1)*0.001 + 1;
-
-
-            FillOutCSV (csv, student, &studentNum);
-
-            system("pause");
             break;
 
         case deleteData :
 
-            DeleteStudent (student, &studentNum);
-            student = (STUDENT *) realloc(student, sizeof(STUDENT) * studentNum );
-            FillOutCSV (csv, student, &studentNum);
-            system("pause");
+            student = DeleteStudent (student, &studentNum);
 
             break;
 
         case finish :
 
             End();
-            system("pause");
             stop = true;
             break;
         }
 
     }
 
-    /*******************************************************/
-
     free (student);
-    //system("pause");
-    //system("cls");
 
     return 0;
 }

@@ -211,19 +211,35 @@ void PrintTotalScore (STUDENT *student, int number)
     printf("Total Score = %.3f \n", total);
 }
 
-/************** some fucking problem ********************/
-void InsertStudent (STUDENT *student, int *number)
+
+STUDENT *InsertStudent (STUDENT *student, int *number)
 {
     system("cls");
-   /* char id[10];
-    id[9] = '\0';
-    printf("StudentID   = K");
-    scanf("%s", &id);*/
+    char *id;
+    id = (char *) calloc(10, sizeof(char));
+    float Eng, Math, Sci;
 
+    printf("StudentID   = K");
+    scanf("%s", id);
+    printf("English =");
+    scanf("%f", &Eng);
+    printf("Math = ");
+    scanf("%f", &Math);
+    printf("Science = ");
+    scanf("%f", &Sci);
     *number = *number + 1;// number of students add 1
-    student = (STUDENT *) realloc(*number, sizeof(STUDENT) );
-    student[ *number ].ID = (char *) calloc(10, sizeof(char));
+
+    student = (STUDENT *) realloc(student, sizeof(STUDENT) * (*number) );
+    student[ *number-1 ].ID = (char *) calloc(10, sizeof(char));
+
+    student[ *number - 1].ID = id;
+    student[ *number-1 ].English = Eng;
+    student[ *number-1 ].Math    = Math;
+    student[ *number-1 ].Science = Sci;
+    printf ("The number of students is %d\n", *number);
+
     system("pause");
+    return student;
 }
 
 
@@ -231,7 +247,7 @@ void InsertStudent (STUDENT *student, int *number)
 //Function : Delete one student's information about ID and score.
 //Input    :
 //Output   :
-void DeleteStudent (STUDENT *student, int *number)
+STUDENT *DeleteStudent (STUDENT *student, int *number)
 {
     system("cls");
     char id[10];
@@ -264,16 +280,13 @@ void DeleteStudent (STUDENT *student, int *number)
         student[j].Science = student[j+1].Science;
     }
     *number = *number - 1;// number of students minus 1
+    student = (STUDENT *) realloc(student, sizeof(STUDENT) * (*number) );
 
-   /* STUDENT *temp;
-    temp = CreateStudentArray (*number);
-    CopyStudent (temp, student, *number);
-    free (student);
-    student = CreateStudentArray (*number);
-    CopyStudent (student, temp, *number);
-    free (temp);*/
+    printf ("The number of students is %d\n", *number);
+
 
     system("pause");
+    return student;
 }
 
 
@@ -341,3 +354,12 @@ void RankTotalScore (STUDENT *student, int total, int number)
 }
 
 
+void PrintSubjectTOP10 (STUDENT *student,int number)
+{
+    BubbleSortEnglish (student, number);
+    PrintEnglishTOP10 (student);
+    BubbleSortMath (student, number);
+    PrintMathTOP10 (student);
+    BubbleSortScience (student, number);
+    PrintScienceTOP10 (student);
+}
