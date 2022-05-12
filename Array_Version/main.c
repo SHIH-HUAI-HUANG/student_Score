@@ -8,10 +8,10 @@
 
 #include "header.h"
 
-int main()
+int main(int argc, char **argv)
 {
     // define value
-    int studentNum = 10;
+    int studentNum = 1000;
     STUDENT *student;
     STATE state;
     FILE *csv;
@@ -22,9 +22,6 @@ int main()
     // Random
     RandomID (student, studentNum);
     RandomScore (student, studentNum);
-    BubbleSortID (student, studentNum);
-    // Store in file.CSV
-    FillOutCSV (csv, student, &studentNum);
 
     while ( !stop )
     {
@@ -82,6 +79,5 @@ int main()
     }
 
     free (student);
-
     return 0;
 }

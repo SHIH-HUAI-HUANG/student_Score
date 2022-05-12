@@ -73,8 +73,10 @@ STUDENT *InsertStudent (STUDENT *student, int *number);
 void PrintSubjectTOP10 (STUDENT *student,int number);
 
 
-void test(int *a);
-void test2 (STUDENT *student);
+/** color **/
+
+#define KCYN   "\x1B[0;36m"
+
 
 
 #endif

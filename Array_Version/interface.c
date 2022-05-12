@@ -3,7 +3,7 @@
 void End ()
 {
     system ("cls");
-    printf("\n It's absolutely not a problem if money could solve.\n");
+    printf(KCYN"\n It's absolutely not a problem if money could solve.\n");
     printf("\n                                         -- John Wu\n\n");
     system("pause");
 }
@@ -13,7 +13,7 @@ void End ()
 void Menu ()
 {
     system ("cls");
-    printf("choose the function, and press ENTER\n");
+    printf("choose the function, and press ENTER\n\n");
 
     printf("(1) allStudent\n");
     printf("(2) inquireOneStudent \n");

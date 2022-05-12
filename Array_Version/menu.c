@@ -219,8 +219,12 @@ STUDENT *InsertStudent (STUDENT *student, int *number)
     id = (char *) calloc(10, sizeof(char));
     float Eng, Math, Sci;
 
-    printf("StudentID   = K");
-    scanf("%s", id);
+    do
+    {
+        printf("StudentID   = K");
+        scanf("%s", id);
+    }
+    while (strlen(id) != 9);
 
     do
     {
