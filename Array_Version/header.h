@@ -72,7 +72,7 @@ void CopyStudent (STUDENT *file1, STUDENT *file2, int number);
 STUDENT *InsertStudent (STUDENT *student, int *number);
 void PrintSubjectTOP10 (STUDENT *student,int number);
 
-
+void QuickSort(STUDENT *student, int left,int right);
 /** color **/
 
 #define KCYN   "\x1B[0;36m"

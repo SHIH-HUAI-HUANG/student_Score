@@ -10,14 +10,16 @@
 
 int main()
 {
-    STUDENT *student;
+    struct STUDENT *student = NULL;
+    FILE *csv;
+    srand ( time(NULL) );
+    int num = 5;
 
-
-
-
-
-
-
+    initDataSpace (&student, num);
+    Print(student);
+    Print(student);
+    FillOutCSV (csv, student, &num);
+    printf ("\n%.3f\n", student->next->English);
     printf("Hello world!\n");
     return 0;
 }

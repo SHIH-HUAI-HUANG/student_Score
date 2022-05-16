@@ -11,7 +11,9 @@
 int main(int argc, char **argv)
 {
     // define value
-    int studentNum = 1000;
+    int studentNum = 0;
+    printf("The number of students = ");
+    scanf("%d", &studentNum);
     STUDENT *student;
     STATE state;
     FILE *csv;
@@ -25,7 +27,8 @@ int main(int argc, char **argv)
 
     while ( !stop )
     {
-        BubbleSortID (student, studentNum);
+        QuickSort(student, 0, studentNum-1);
+        //BubbleSortID (student, studentNum);
         FillOutCSV (csv, student, &studentNum);
 
         Menu ();
@@ -39,6 +42,7 @@ int main(int argc, char **argv)
         case allStudent :
 
             PrintfAllStudent (student, studentNum);
+
             break;
 
         case inquireOneStudent :

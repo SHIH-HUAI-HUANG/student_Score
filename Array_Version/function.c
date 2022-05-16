@@ -119,6 +119,37 @@ void BubbleSortID (STUDENT *student, int number)
     }
 }
 
+/****/
+
+void QuickSort(STUDENT *student, int first, int last)
+{
+
+    int i, j, pivot;
+    if(first<last)
+    {
+        pivot=first;
+        i=first;
+        j=last;
+        while(i<j)
+        {
+            while( !(strcmp(student[i].ID, student[pivot].ID) == 1) && (i<last))
+                i++;
+            while( strcmp(student[j].ID ,student[pivot].ID) == 1 )
+                j--;
+            if(i<j)
+            {
+               SwapID (student, i, j);
+               SwapScore (student, i, j);
+            }
+        }
+        SwapID (student, pivot, j);
+        SwapScore (student, pivot, j);
+        QuickSort(student, first, j-1);
+        QuickSort(student, j+1, last);
+    }
+}
+
+/****/
 
 
 //Function : Swap for string
