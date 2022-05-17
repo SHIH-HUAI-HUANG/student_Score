@@ -11,8 +11,6 @@ void PrintfAllStudent (STUDENT *student, int number)
     {
         printf("K%s %.3f   %.3f   %.3f\t\n", student[i].ID, student[i].English, student[i].Math, student[i].Science);
     }
-
-    system("pause");
 }
 
 
@@ -108,7 +106,7 @@ void PrintScienceTOP10 (STUDENT *student)
     {
         printf("number%d ( K%s ) = %.3f\n", i+1, student[i].ID, student[i].Science);
     }
-    system("pause");
+
 }
 
 
@@ -153,7 +151,6 @@ void PrintfStudentTOP10 (STUDENT *student)
         printf("%.3f  ", student[i].Science);
         printf("%.3f \n ", total);
     }
-    system("pause");
 }
 
 
@@ -166,6 +163,8 @@ void OneStudent (STUDENT *student, int number)
     printf("StudentID   = K");
     scanf("%s", &id);
 
+    clock_t start_t, end_t;
+    start_t = clock();
     int i = -1;
     bool same = false;
     // check
@@ -191,8 +190,9 @@ void OneStudent (STUDENT *student, int number)
         RankScience (student, number, i);
         RankTotalScore (student, number, i);
     }
+    end_t = clock();
+    printf ("\ntime = %lf s\n", (double)(end_t - start_t) / CLOCKS_PER_SEC);
 
-    system("pause");
 }
 
 void PrintfStudentINFO (STUDENT *student, int number)
@@ -215,6 +215,7 @@ void PrintTotalScore (STUDENT *student, int number)
 STUDENT *InsertStudent (STUDENT *student, int *number)
 {
     system("cls");
+    clock_t start_t, end_t;
     char *id;
     id = (char *) calloc(10, sizeof(char));
     float Eng, Math, Sci;
@@ -244,7 +245,7 @@ STUDENT *InsertStudent (STUDENT *student, int *number)
         scanf("%f", &Sci);
     }
     while (Sci<0.000 || Sci>1000.000);
-
+    start_t = clock();
     *number = *number + 1;// number of students add 1
 
     student = (STUDENT *) realloc(student, sizeof(STUDENT) * (*number) );
@@ -256,7 +257,8 @@ STUDENT *InsertStudent (STUDENT *student, int *number)
     student[ *number-1 ].Science = Sci;
     printf ("The number of students is %d\n", *number);
 
-    system("pause");
+    end_t = clock();
+    printf ("\ntime = %lf s\n", (double)(end_t - start_t) / CLOCKS_PER_SEC);
     return student;
 }
 
@@ -268,11 +270,13 @@ STUDENT *InsertStudent (STUDENT *student, int *number)
 STUDENT *DeleteStudent (STUDENT *student, int *number)
 {
     system("cls");
+    clock_t start_t, end_t;
     char id[10];
     id[9] = '\0';
     printf("StudentID   = K");
     scanf("%s", &id);
 
+    start_t = clock();
     int i = -1;
     bool stop = false, same = false;
     // check
@@ -308,8 +312,8 @@ STUDENT *DeleteStudent (STUDENT *student, int *number)
     }
 
     printf ("The number of students is %d\n", *number);
-
-    system("pause");
+    end_t = clock();
+    printf ("\ntime = %lf s\n", (double)(end_t - start_t) / CLOCKS_PER_SEC);
     return student;
 }
 

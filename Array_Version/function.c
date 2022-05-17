@@ -187,17 +187,6 @@ void SwapScore (STUDENT *student, int number1, int number2)
 
 
 
-// change value in function
-void test(int *a)
-{
-    *a = 123546;
-}
-
-void test2 (STUDENT *student)
-{
-    student[0].ID = student[1].ID;
-}
-
 /*****************************************************/
 
 /*
