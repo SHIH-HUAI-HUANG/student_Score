@@ -36,19 +36,16 @@ typedef enum STATE
 
 
 /** function **/
+//bais
 STUDENT *CreateStudentArray (int number);
 void RandomID (STUDENT *student, int number);
 void RandomScore (STUDENT *student, int number);
-void FillOutCSV (FILE *csv, STUDENT *student, int *number);
+void FillOutCSV (STUDENT *student, int *number);
 void BubbleSortID (STUDENT *student, int number);
+void QuickSort(STUDENT *student, int left,int right);
 void SwapScore (STUDENT *student, int number1, int number2);
 void SwapID (STUDENT *student, int number1, int number2);
-
-void End ();
-void Menu ();
-
-int GetCsvLines (FILE *csv);
-
+//menu
 void PrintfAllStudent (STUDENT *student, int number);
 void BubbleSortEnglish (STUDENT *student, int number);
 void BubbleSortMath (STUDENT *student, int number);
@@ -60,8 +57,6 @@ void RankEnglish (STUDENT *student, int total, int number);
 void RankMath (STUDENT *student, int total, int number);
 void RankScience (STUDENT *student, int total, int number);
 void RankTotalScore (STUDENT *student, int total, int number);
-
-
 void BubbleSortTotalScore (STUDENT *student, int number);
 void PrintfStudentTOP10 (STUDENT *student);
 void OneStudent (STUDENT *student, int number);
@@ -71,8 +66,12 @@ STUDENT *DeleteStudent (STUDENT *student, int *number);
 void CopyStudent (STUDENT *file1, STUDENT *file2, int number);
 STUDENT *InsertStudent (STUDENT *student, int *number);
 void PrintSubjectTOP10 (STUDENT *student,int number);
+//interface
+void End ();
+void Menu ();
+int GetCsvLines (FILE *csv);
 
-void QuickSort(STUDENT *student, int left,int right);
+
 /** color **/
 
 #define KCYN   "\x1B[0;36m"

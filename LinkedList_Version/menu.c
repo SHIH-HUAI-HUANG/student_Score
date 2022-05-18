@@ -3,13 +3,17 @@
 //Function : Print all students' IDs and Scores.
 //Input    : student's information, numbers of students
 //Output   :
-void PrintfAllStudent (STUDENT *student, int number)
+void PrintfAllStudent (struct DATA* head)
 {
     system("cls");
-    printf("studentID  English  Math  Science\n");
-    for (int i = 0; i < number; i++)
+    printf("studentID  English    Math    Science\n");
+    while (head != NULL)
     {
-        printf("K%s %.3f   %.3f   %.3f\t\n", student[i].ID, student[i].English, student[i].Math, student[i].Science);
+        printf("K%s %.3f   %.3f   %.3f\t\n", head->ID,
+               head->English,
+               head->Math,
+               head->Science);
+        head = head->next;
     }
 }
 
@@ -21,7 +25,7 @@ void PrintfAllStudent (STUDENT *student, int number)
 //Output   :
 void BubbleSortEnglish (STUDENT *student, int number)
 {
-    for (int i = 0; i < 10; i++)
+    for (int i = 0; i < (10-1); i++)
     {
         for (int j = (i+1); j < number; j++)
         {
@@ -41,7 +45,7 @@ void BubbleSortEnglish (STUDENT *student, int number)
 //Output   :
 void BubbleSortMath (STUDENT *student, int number)
 {
-    for (int i = 0; i < 10; i++)
+    for (int i = 0; i < (10-1); i++)
     {
         for (int j = (i+1); j < number; j++)
         {
@@ -61,7 +65,7 @@ void BubbleSortMath (STUDENT *student, int number)
 //Output   :
 void BubbleSortScience (STUDENT *student, int number)
 {
-    for (int i = 0; i < 10; i++)
+    for (int i = 0; i < (10-1); i++)
     {
         for (int j = (i+1); j < number; j++)
         {
@@ -140,7 +144,7 @@ void PrintfStudentTOP10 (STUDENT *student)
     system("cls");
     float total = 0;
     printf("Students TOP 10 \n");
-    printf("number    StudentID  English  Math    Science   TotalScore\t\n");
+    printf("number  StudentID  English  Math  Science TotalScore\t\n");
     for (int i = 0; i < 10; i++)
     {
         total = student[i].English + student[i].Math + student[i].Science;
@@ -155,7 +159,7 @@ void PrintfStudentTOP10 (STUDENT *student)
 
 
 
-void OneStudent (STUDENT *student, int number)
+void OneStudent (STUDENT *student, int number, struct DATA* head)
 {
     system("cls");
     char id[10];
@@ -184,7 +188,12 @@ void OneStudent (STUDENT *student, int number)
     // printf
     if (i != number)
     {
-        PrintfStudentINFO (student, i);
+        for (int j = 0; j < (number-i-1); j++)
+        {
+            head = head->next;
+        }
+        printf("ID = %s\nEnglisg = %.3f\nMath = %.3f\nSciemce = %.3f\n",
+               head->ID, head->English, head->Math, head->Science);
         RankEnglish (student, number, i);
         RankMath (student, number, i);
         RankScience (student, number, i);

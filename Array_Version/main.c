@@ -16,7 +16,6 @@ int main(int argc, char **argv)
     scanf("%d", &studentNum);
     STUDENT *student;
     STATE state;
-    FILE *csv;
     bool stop = false;
     srand ( time(NULL) );
     clock_t start_t, end_t;
@@ -30,7 +29,7 @@ int main(int argc, char **argv)
     {
         QuickSort(student, 0, studentNum-1);
         //BubbleSortID (student, studentNum);
-        FillOutCSV (csv, student, &studentNum);
+        FillOutCSV (student, &studentNum);
 
         Menu ();
         int stateKey = 0;

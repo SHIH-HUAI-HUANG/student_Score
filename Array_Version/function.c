@@ -55,9 +55,9 @@ void RandomID (STUDENT *student, int number)
 //Function : store the memory of score in file.csv.
 //Input    : file.csv, English, Math, Science
 //Output   :
-void FillOutCSV (FILE *csv, STUDENT *student, int *number)
+void FillOutCSV (STUDENT *student, int *number)
 {
-    //csv = fopen("score.csv", "w");
+    FILE *csv;
     if( (csv = fopen("score.csv", "w")) == NULL )
     {
         puts("Fail to open file!");
@@ -73,30 +73,6 @@ void FillOutCSV (FILE *csv, STUDENT *student, int *number)
                 student[i].Science);
     }
     fclose (csv);
-}
-
-
-
-//Function : get the lines of file.csv
-//Input    : file.csv
-//Output   : the number of lines
-int GetCsvLines (FILE *csv)
-{
-    char str[10+1];
-    int count = 0;
-    if( (csv = fopen("score.csv", "rt")) == NULL )
-    {
-        puts("Fail to open file!");
-        exit(0);
-    }
-
-    while(fgets(str, 10, csv) != NULL)
-    {
-        printf("%s", str);
-        count = count + 1;
-    }
-    fclose(csv);
-    return (count/4 - 1);//
 }
 
 
@@ -119,7 +95,7 @@ void BubbleSortID (STUDENT *student, int number)
     }
 }
 
-/****/
+
 
 void QuickSort(STUDENT *student, int first, int last)
 {
@@ -149,7 +125,6 @@ void QuickSort(STUDENT *student, int first, int last)
     }
 }
 
-/****/
 
 
 //Function : Swap for string
@@ -229,6 +204,27 @@ double **CreateCharArray2d (int row, int col)
 
 
 
+//Function : get the lines of file.csv
+//Input    : file.csv
+//Output   : the number of lines
+int GetCsvLines (FILE *csv)
+{
+    char str[10+1];
+    int count = 0;
+    if( (csv = fopen("score.csv", "rt")) == NULL )
+    {
+        puts("Fail to open file!");
+        exit(0);
+    }
+
+    while(fgets(str, 10, csv) != NULL)
+    {
+        printf("%s", str);
+        count = count + 1;
+    }
+    fclose(csv);
+    return (count/4 - 1);//
+}
 
 
 

@@ -1,80 +1,30 @@
 #include "header.h"
 
-void Print (struct STUDENT* head)
+STUDENT *CreateStudentArray (int number)
 {
-    while (head != NULL)
+    STUDENT *student = (STUDENT *) calloc(number, sizeof(STUDENT));
+    for (int i = 0; i < number; i++)
     {
-        printf("%.3f\n", head->English);
-        printf("%.3f\n", head->Math   );
-        printf("%.3f\n\n", head->Science);
-
-
-        head = head->next;
+        student[i].ID = (char *) calloc(10, sizeof(char));
     }
+    return student;
 }
 
 
 
-
-/* Given a reference (pointer to pointer) to the head of a list
-and an int, inserts a new STUDENT on the front of the list. */
-void pushEnglish(struct STUDENT** head_ref)
-{
-    /* 1. allocate STUDENT */
-    struct STUDENT* new_STUDENT = (struct STUDENT*) calloc(1, sizeof(struct STUDENT));
-
-    /* 2. put in the data */
-    new_STUDENT->English = RandomScore();
-    new_STUDENT->Math    = RandomScore();
-    new_STUDENT->Science = RandomScore();
-    //new_STUDENT->ID      =
-
-    /* 3. Make next of new STUDENT as head */
-    new_STUDENT->next = (*head_ref);
-
-    /* 4. move the head to point to the new STUDENT */
-    (*head_ref) = new_STUDENT;
-}
-
-
-void initDataSpace (struct STUDENT** head_ref, int number)
+//Function : assign random number in double Array. (random is 000.000 ~ 1000.000)
+//Input    :
+//Output   :
+void RandomScore (STUDENT *student, int number)
 {
     for (int i = 0; i < number; i++)
     {
-        pushEnglish (head_ref);
+        student[i].English = rand()%1000 + (rand()%1000+1)*0.001 ;
+        student[i].Math    = rand()%1000 + (rand()%1000+1)*0.001 ;
+        student[i].Science = rand()%1000 + (rand()%1000+1)*0.001 ;
     }
-
 }
 
-
-
-float RandomScore ()
-{
-    float score = rand()%1000 + (rand()%1000+1)*0.001;
-    return score;
-}
-
-
-//Function : store the memory of score in file.csv.
-//Input    : file.csv, English, Math, Science
-//Output   :
-void FillOutCSV (FILE *csv, STUDENT *student, int *number)
-{
-    if( (csv = fopen("score.csv", "w")) == NULL )
-    {
-        puts("Fail to open file!");
-        exit(0);
-    }
-    fprintf(csv, "StudentID, English, Math, Science\n");
-    for (int i = 0; i < *number; i++)
-    {
-        fprintf(csv, " ,%.3f,%.3f,%.3f\n",student->English,
-                student->Math,
-                student->Science);
-        student = student->next;
-    }
-    fclose (csv);
-}
 
 
 void RandomID (STUDENT *student, int number)
@@ -99,3 +49,198 @@ void RandomID (STUDENT *student, int number)
         while (repeat);
     }
 }
+
+
+
+//Function : store the memory of score in file.csv.
+//Input    : file.csv, English, Math, Science
+//Output   :
+void FillOutCSV (STUDENT *student, int *number)
+{
+    FILE *csv;
+    if( (csv = fopen("score.csv", "w")) == NULL )
+    {
+        puts("Fail to open file!");
+        exit(0);
+    }
+    fprintf(csv, "StudentID, English, Math, Science\n");
+    for (int i = 0; i < *number; i++)
+    {
+        fprintf(csv, "K%s,%.3f,%.3f,%.3f\n",
+                student[i].ID,
+                student[i].English,
+                student[i].Math,
+                student[i].Science);
+    }
+    fclose (csv);
+}
+
+
+
+//Function : get the lines of file.csv
+//Input    : file.csv
+//Output   : the number of lines
+int GetCsvLines ()
+{
+    FILE *csv;
+    char str[10+1];
+    int count = 0;
+    if( (csv = fopen("score.csv", "rt")) == NULL )
+    {
+        puts("Fail to open file!");
+        exit(0);
+    }
+
+    while(fgets(str, 10, csv) != NULL)
+    {
+        printf("%s", str);
+        count = count + 1;
+    }
+    fclose(csv);
+    return (count/4 - 1);//
+}
+
+
+
+//Function : Bubble Sort for string
+//Input    : source, numbers of students
+//Output   :
+void BubbleSortID (STUDENT *student, int number)
+{
+    for (int i = 0; i < (number-1); i++)
+    {
+        for (int j = (i+1); j < number; j++)
+        {
+            if ( strcmp (student[i].ID, student[j].ID) > 0 )
+            {
+                SwapScore (student, i, j);
+                SwapID    (student, i, j);
+            }
+        }
+    }
+}
+
+/****/
+
+void QuickSort(STUDENT *student, int first, int last)
+{
+
+    int i, j, pivot;
+    if(first<last)
+    {
+        pivot=first;
+        i=first;
+        j=last;
+        while(i<j)
+        {
+            while( !(strcmp(student[i].ID, student[pivot].ID) == 1) && (i<last))
+                i++;
+            while( strcmp(student[j].ID ,student[pivot].ID) == 1 )
+                j--;
+            if(i<j)
+            {
+               SwapID (student, i, j);
+               SwapScore (student, i, j);
+            }
+        }
+        SwapID (student, pivot, j);
+        SwapScore (student, pivot, j);
+        QuickSort(student, first, j-1);
+        QuickSort(student, j+1, last);
+    }
+}
+
+/****/
+
+
+//Function : Swap for string
+//Input    : source, two numbers you want to change
+//Output   :
+void SwapID (STUDENT *student, int number1, int number2)
+{
+    char *temp = (char *) calloc(10, sizeof(char));
+    // swap
+    temp = student[number1].ID;
+    student[number1].ID = student[number2].ID;
+    student[number2].ID = temp;
+}
+
+
+
+//Function : Swap for English, Math, Science
+//Input    : source, two numbers you want to change
+//Output   :
+void SwapScore (STUDENT *student, int number1, int number2)
+{
+    float temp = 0;
+    temp = student[number1].English;
+    student[number1].English = student[number2].English;
+    student[number2].English = temp;
+
+    temp = student[number1].Math;
+    student[number1].Math = student[number2].Math;
+    student[number2].Math = temp;
+
+    temp = student[number1].Science;
+    student[number1].Science = student[number2].Science;
+    student[number2].Science = temp;
+}
+
+
+
+/*****************************************************/
+
+/*
+//Function :
+//Input    : add = 0
+//Output   : > return true, < return false
+bool NumericComparison (STUDENT student, int row1, int row2, int now)
+{
+    if       ( student.ID[row1][now] > student.ID[row2][now] ) return true;
+
+    else if ( student.ID[row1][now] < student.ID[row2][now] ) return false;
+
+    else if ( student.ID[row1][now] = student.ID[row2][now] ) return NumericComparison (student, row1, row2, now+1);
+}*/
+
+
+//Function : Memory allocate the double Array.
+//Input    : the colum of Array.
+//Output   : the address of Array.
+double *CreateDoubleArray1d (int col)
+{
+    double *address = (double *) calloc(col, sizeof(double));
+    return address;
+}
+
+
+
+//Function : Memory allocate
+//Input    :
+//Output   :
+double **CreateCharArray2d (int row, int col)
+{
+    char **address = (char **) calloc(row, sizeof(char *));
+    for (int i = 0; i < row; i++)
+    {
+        address[i] = (char *) calloc(col, sizeof(char));
+    }
+    return address;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
