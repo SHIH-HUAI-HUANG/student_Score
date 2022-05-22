@@ -219,6 +219,7 @@ STUDENT *InsertStudent (STUDENT *student, int *number)
     char *id;
     id = (char *) calloc(10, sizeof(char));
     float Eng, Math, Sci;
+    bool repeat = false;
 
     do
     {
@@ -227,35 +228,47 @@ STUDENT *InsertStudent (STUDENT *student, int *number)
     }
     while (strlen(id) != 9);
 
-    do
+    for (int i = 0; i < *number; i++)
     {
-        printf("English =");
-        scanf("%f", &Eng);
+        if ( strcmp(id, student[i].ID) == 0 ) repeat = true;
     }
-    while (Eng<0.000 || Eng>1000.000);
-    do
-    {
-        printf("Math = ");
-        scanf("%f", &Math);
-    }
-    while (Math<0.000 || Math>1000.000);
-    do
-    {
-        printf("Science = ");
-        scanf("%f", &Sci);
-    }
-    while (Sci<0.000 || Sci>1000.000);
-    start_t = clock();
-    *number = *number + 1;// number of students add 1
 
-    student = (STUDENT *) realloc(student, sizeof(STUDENT) * (*number) );
-    student[ *number-1 ].ID = (char *) calloc(10, sizeof(char));
+    if (repeat)
+    {
+        printf("The StudentID is not exist !\n");
+    }
+    else
+    {
+        do
+        {
+            printf("English =");
+            scanf("%f", &Eng);
+        }
+        while (Eng<0.000 || Eng>1000.000);
+        do
+        {
+            printf("Math = ");
+            scanf("%f", &Math);
+        }
+        while (Math<0.000 || Math>1000.000);
+        do
+        {
+            printf("Science = ");
+            scanf("%f", &Sci);
+        }
+        while (Sci<0.000 || Sci>1000.000);
+        start_t = clock();
+        *number = *number + 1;// number of students add 1
 
-    student[ *number - 1].ID = id;
-    student[ *number-1 ].English = Eng;
-    student[ *number-1 ].Math    = Math;
-    student[ *number-1 ].Science = Sci;
-    printf ("The number of students is %d\n", *number);
+        student = (STUDENT *) realloc(student, sizeof(STUDENT) * (*number) );
+        student[ *number-1 ].ID = (char *) calloc(10, sizeof(char));
+
+        student[ *number - 1].ID = id;
+        student[ *number-1 ].English = Eng;
+        student[ *number-1 ].Math    = Math;
+        student[ *number-1 ].Science = Sci;
+        printf ("The number of students is %d\n", *number);
+    }
 
     end_t = clock();
     printf ("\ntime = %lf s\n", (double)(end_t - start_t) / CLOCKS_PER_SEC);
@@ -390,4 +403,47 @@ void PrintSubjectTOP10 (STUDENT *student,int number)
     PrintMathTOP10 (student);
     BubbleSortScience (student, number);
     PrintScienceTOP10 (student);
+}
+
+
+void ChooseSortMode (STUDENT *student, int number)
+{
+    int line = 1;
+    int key = 0;
+    while (key != 13)
+    {
+        if (key == 80) line++; //down-key
+        else if (key == 72)line--; //up-key
+        if (line < 1) line = 1;
+        else if (line > 2) line = 2;
+        switch (line)
+        {
+        case 1:
+            system("cls");
+            printf("\n\n\n\n\n\n\n                   Choose your mode\n\n");
+            printf("                   --> Bubble Sort \n");
+            printf("                       Quick  Sort \n");
+            break;
+        case 2:
+            system("cls");
+            printf("\n\n\n\n\n\n\n                   Choose your mode\n\n");
+            printf("                       Bubble Sort \n");
+            printf("                   --> Quick  Sort \n");
+            break;
+        }
+        key = getch();
+    }
+
+    switch (line)
+    {
+    case 1:
+        BubbleSortID (student, number);
+        break;
+
+    case 2:
+        QuickSort(student, 0, number-1);
+        break;
+    }
+    system("cls");
+    printf("\n\n\n\n\n\n\n                  Sort is finished !\n\n\n\n\n");
 }

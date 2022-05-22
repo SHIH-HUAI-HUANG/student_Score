@@ -21,7 +21,7 @@ void Menu ()
     printf("(4) inquireStudentTOP10 \n");
     printf("(5) insertData \n");
     printf("(6) deleteData \n");
-    printf("(7) finish \n");
-
+    printf("(7) Choose the sort-mode \n");
+    printf("(8) finish \n");
 }
 

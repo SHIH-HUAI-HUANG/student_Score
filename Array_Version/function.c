@@ -110,12 +110,12 @@ void QuickSort(STUDENT *student, int first, int last)
         {
             while( !(strcmp(student[i].ID, student[pivot].ID) == 1) && (i<last))
                 i++;
-            while( strcmp(student[j].ID ,student[pivot].ID) == 1 )
+            while( strcmp(student[j].ID,student[pivot].ID) == 1 )
                 j--;
             if(i<j)
             {
-               SwapID (student, i, j);
-               SwapScore (student, i, j);
+                SwapID (student, i, j);
+                SwapScore (student, i, j);
             }
         }
         SwapID (student, pivot, j);
@@ -207,11 +207,12 @@ double **CreateCharArray2d (int row, int col)
 //Function : get the lines of file.csv
 //Input    : file.csv
 //Output   : the number of lines
-int GetCsvLines (FILE *csv)
+int GetCsvLines (char file_name[])
 {
+    FILE *csv;
     char str[10+1];
     int count = 0;
-    if( (csv = fopen("score.csv", "rt")) == NULL )
+    if( (csv = fopen(file_name, "r")) == NULL )
     {
         puts("Fail to open file!");
         exit(0);
@@ -219,7 +220,7 @@ int GetCsvLines (FILE *csv)
 
     while(fgets(str, 10, csv) != NULL)
     {
-        printf("%s", str);
+       // printf("%s", str);
         count = count + 1;
     }
     fclose(csv);
@@ -228,7 +229,58 @@ int GetCsvLines (FILE *csv)
 
 
 
+void ReadCSV (STUDENT *student, char file_name[])
+{
+    //file_name = "score.csv";
+    FILE *fp;
+    fp = fopen(file_name, "r");
 
+    if (!fp)
+    {
+        fprintf(stderr, "failed to open file for reading\n");
+        return 1;
+    }
+
+    char line[50];
+    char *result = NULL;
+    fgets(line, 50, fp);
+    int i = 0;
+
+    while(fgets(line, 50, fp) != NULL)
+    {
+
+        result = strtok(line, "K,");
+        int j = 0;
+        while( result != NULL )
+        {
+            switch (j)
+            {
+            case 0:
+               sscanf(result, "%s", student[i].ID);
+                break;
+            case 1:
+                student[i].English = atof(result);
+
+                break;
+            case 2:
+                student[i].Math = atof(result);
+
+                break;
+            case 3:
+                student[i].Science = atof(result);
+
+                break;
+            }
+            result = strtok(NULL, ",");
+            j++;
+        }
+        printf("\n");
+        i++;
+    }
+
+    fclose (fp);
+
+}
 
 
 

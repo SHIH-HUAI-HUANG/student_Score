@@ -31,7 +31,8 @@ typedef enum STATE
     inquireStudentTOP10 = 4,
     insertData          = 5,
     deleteData          = 6,
-    finish              = 7
+    SORT                = 7,
+    finish              = 8
 } STATE;
 
 
@@ -69,9 +70,12 @@ void PrintSubjectTOP10 (STUDENT *student,int number);
 //interface
 void End ();
 void Menu ();
-int GetCsvLines (FILE *csv);
+int GetCsvLines (char file_name[]);
+
+void ChooseSortMode (STUDENT *student, int number);
 
 
+void ReadCSV (STUDENT *student, char file_name[]);
 /** color **/
 
 #define KCYN   "\x1B[0;36m"
