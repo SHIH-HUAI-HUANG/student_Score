@@ -29,11 +29,13 @@ void RandomScore (STUDENT *student, int number)
 
 void RandomID (STUDENT *student, int number)
 {
-    bool repeat = false;
+    bool repeat;
     for (int i = 0; i < number; i++)
     {
+         repeat = false;
         do
         {
+
             for (int j = 0; j < (10-1); j++)
             {
                 student[i].ID[j] = (char)(rand()%10 + 48);
@@ -274,7 +276,7 @@ void ReadCSV (STUDENT *student, char file_name[])
             result = strtok(NULL, ",");
             j++;
         }
-        printf("\n");
+       // printf("\n");
         i++;
     }
 

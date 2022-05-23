@@ -61,7 +61,7 @@ int main(int argc, char **argv)
         // Random
         RandomID (student, studentNum);
         RandomScore (student, studentNum);
-        FillOutCSV (student, &studentNum);
+       // FillOutCSV (student, &studentNum);
         break;
     }
 
