@@ -32,10 +32,9 @@ void RandomID (STUDENT *student, int number)
     bool repeat;
     for (int i = 0; i < number; i++)
     {
-         repeat = false;
         do
         {
-
+            repeat = false;
             for (int j = 0; j < (10-1); j++)
             {
                 student[i].ID[j] = (char)(rand()%10 + 48);
@@ -44,9 +43,9 @@ void RandomID (STUDENT *student, int number)
 
             for (int k = 0; k < i; k++)
             {
-                if (student[i].ID == student[k].ID) repeat = true;
+                if ( strcmp(student[i].ID, student[k].ID) == 0 ) repeat = true;
             }
-            //printf("%d", repeat);
+           // printf("%d", repeat);
         }
         while (repeat);
     }
@@ -222,7 +221,7 @@ int GetCsvLines (char file_name[])
 
     while(fgets(str, 10, csv) != NULL)
     {
-       // printf("%s", str);
+        // printf("%s", str);
         count = count + 1;
     }
     fclose(csv);
@@ -258,7 +257,7 @@ void ReadCSV (STUDENT *student, char file_name[])
             switch (j)
             {
             case 0:
-               sscanf(result, "%s", student[i].ID);
+                sscanf(result, "%s", student[i].ID);
                 break;
             case 1:
                 student[i].English = atof(result);
@@ -276,7 +275,7 @@ void ReadCSV (STUDENT *student, char file_name[])
             result = strtok(NULL, ",");
             j++;
         }
-       // printf("\n");
+        // printf("\n");
         i++;
     }
 

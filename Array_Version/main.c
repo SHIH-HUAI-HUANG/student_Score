@@ -66,7 +66,7 @@ int main(int argc, char **argv)
     }
 
     /******************************************************/
-
+system("pause");
 
 
 
@@ -74,7 +74,7 @@ int main(int argc, char **argv)
     {
         Menu ();
         int stateKey = 0;
-        printf("state = ");
+        printf("                   state = ");
         scanf("%d", &stateKey);
         state = stateKey;
 
@@ -121,10 +121,7 @@ int main(int argc, char **argv)
             break;
 
         case SORT :
-            start_t = clock();
             ChooseSortMode (student, studentNum);
-            end_t = clock();
-            printf ("\ntime = %lf s\n", (double)(end_t - start_t) / CLOCKS_PER_SEC);
             system("pause");
             break;
 

@@ -408,6 +408,7 @@ void PrintSubjectTOP10 (STUDENT *student,int number)
 
 void ChooseSortMode (STUDENT *student, int number)
 {
+    clock_t start_t, end_t;
     int line = 1;
     int key = 0;
     while (key != 13)
@@ -433,7 +434,7 @@ void ChooseSortMode (STUDENT *student, int number)
         }
         key = getch();
     }
-
+    start_t = clock();
     switch (line)
     {
     case 1:
@@ -444,6 +445,8 @@ void ChooseSortMode (STUDENT *student, int number)
         QuickSort(student, 0, number-1);
         break;
     }
+    end_t = clock();
     system("cls");
-    printf("\n\n\n\n\n\n\n                  Sort is finished !\n\n\n\n\n");
+    printf("\n\n\n\n\n\n\n                  Sort is finished !\n");
+    printf ("\ntime = %lf s\n", (double)(end_t - start_t) / CLOCKS_PER_SEC);
 }
