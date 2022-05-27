@@ -3,11 +3,11 @@
 void End ()
 {
     system ("cls");
-    printf(KCYN"\n It's absolutely not a problem if money could solve.\n");
-    printf("\n                                         -- John Wu\n\n");
+    printf(KCYN"\n\n\n\n\n\n\n\n     It's absolutely not a problem if money could solve.\n");
+    printf("\n                                              -- John Wu");
+    printf("\n\n\n\n\n\n\n\n\n\n\n\n");
     system("pause");
 }
-
 
 
 void Menu ()

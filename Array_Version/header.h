@@ -73,7 +73,7 @@ void Menu ();
 int GetCsvLines (char file_name[]);
 
 void ChooseSortMode (STUDENT *student, int number);
-
+STUDENT *ChooseDataSource (STUDENT *student, int *studentNum);
 
 void ReadCSV (STUDENT *student, char file_name[]);
 /** color **/
